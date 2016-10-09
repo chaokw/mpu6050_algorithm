@@ -1,4 +1,4 @@
-
+ï»¿
 /**************************************************************
 *	Include File Section
 **************************************************************/
@@ -31,10 +31,10 @@ int32 angle_xyz_data[3][ANGLE_FILTER_COUNT] = { 0 };
 
 /**************************************************************
 *	Name...........:	accel_BConverttoN
-*	description....:	½«¼ÓËÙ¶ÈµÄÖµ´ÓÔØÌå×ø±êÏµ×ªÎªµØÀí×ø±êÏµ
-*	param..........:	accel_res[out]	:×ª»»µÃµ½µÄÖµ£¬Ë³ĞòÎªx,y,z
-				accel:Óû×ª»»µÄÔØÌå×ø±êÏµµÄ¼ÓËÙ¶ÈÖµ
-				q:ËÄÔªÊı
+*	description....:	å°†åŠ é€Ÿåº¦çš„å€¼ä»è½½ä½“åæ ‡ç³»è½¬ä¸ºåœ°ç†åæ ‡ç³»
+*	param..........:	accel_res[out]	:è½¬æ¢å¾—åˆ°çš„å€¼ï¼Œé¡ºåºä¸ºx,y,z
+				accel:æ¬²è½¬æ¢çš„è½½ä½“åæ ‡ç³»çš„åŠ é€Ÿåº¦å€¼
+				q:å››å…ƒæ•°
 **************************************************************/
 void accel_BConvertToN(int32 accel_res[3], int32 accel[3], float q[4])
 {
@@ -48,33 +48,33 @@ void accel_BConvertToN(int32 accel_res[3], int32 accel[3], float q[4])
 #if AVERGE_FILTER_OPEN
 /**************************************************************
 *	Name...........:	accel_Filter
-*	description....:	¶ÔÔ­Ê¼Êı¾İ¼ÓËÙ¶ÈÖµ½øĞĞÂË²¨
-*	param..........:	accel[in,changed]	:Ô­Ê¼Êı¾İ¼ÓËÙ¶ÈÖµ
-				acc_ave[out]	:ÂË²¨µÃµ½µÄ¼ÓËÙ¶ÈÖµ
+*	description....:	å¯¹åŸå§‹æ•°æ®åŠ é€Ÿåº¦å€¼è¿›è¡Œæ»¤æ³¢
+*	param..........:	accel[in,changed]	:åŸå§‹æ•°æ®åŠ é€Ÿåº¦å€¼
+				acc_ave[out]	:æ»¤æ³¢å¾—åˆ°çš„åŠ é€Ÿåº¦å€¼
 **************************************************************/
 void accel_Filter(int16 accel[3], int32 acc_ave[3])
 {
 	int i, j;
 	int32	acc_data_sum[3] = { 0 };
-	//ÏÈ½øĞĞÒ»´Î»úĞµ´°¿ÚÂË²¨
+	//å…ˆè¿›è¡Œä¸€æ¬¡æœºæ¢°çª—å£æ»¤æ³¢
 	for (i = 0; i < 3; i++)
 	{
 		if (accel[i] < ACCEL_WINDOW_H && accel[i] > ACCEL_WINDOW_L)
 			accel[i] = 0;
 	}
-	//½«iÖáµÄ¼ÓËÙ¶È±£´æÔÚacc_data_indexÁĞÖĞ
+	//å°†iè½´çš„åŠ é€Ÿåº¦ä¿å­˜åœ¨acc_data_indexåˆ—ä¸­
 	for (i = 0; i<3; i++)
 	{
 		acc_xyz_data[i][acc_data_index] = accel[i];
 	}
-	//acc_data_indexÑ­»·¼Ó1
+	//acc_data_indexå¾ªç¯åŠ 1
 	acc_data_index++;
 
 	if (acc_data_index == ACC_FILTER_COUNT)
 	{
 		acc_data_index = 0;
 	}
-	//ĞĞÇóºÍ
+	//è¡Œæ±‚å’Œ
 	for (i = 0; i<3; i++)
 	{
 		for (j = 0; j<ACC_FILTER_COUNT; j++)
@@ -83,7 +83,7 @@ void accel_Filter(int16 accel[3], int32 acc_ave[3])
 		}
 		acc_ave[i] = acc_data_sum[i] / ACC_FILTER_COUNT;
 	}
-	//ÔÙ¶Ôacc_ave½øĞĞÒ»´Î»úĞµ´°¿ÚÂË²¨
+	//å†å¯¹acc_aveè¿›è¡Œä¸€æ¬¡æœºæ¢°çª—å£æ»¤æ³¢
 	for (i = 0; i<3; i++)
 	{
 		if (acc_ave[i] < ACCEL_WINDOW_H && acc_ave[i] > ACCEL_WINDOW_L)
@@ -95,16 +95,16 @@ void accel_Filter(int16 accel[3], int32 acc_ave[3])
 
 /**************************************************************
 *	Name...........:	movement_End_Check
-*	description....:	Èç¹û¼ÓËÙ¶ÈµÄÖµÎª0µÄ´ÎÊı³¬¹ıÉèÖÃÖµ£¬
-				Ôò½«ËÙ¶ÈµÄÖµÖÃ0
-*	param..........:	accel_n	:¼ÓËÙ¶ÈÖµÖ¸Õë
-				vel[in,changed]	:ËÙ¶ÈÖµÖ¸Õë,vel[1][0-2]Îªµ±Ç°ËÙ¶È£¬
-				vel[0][0-2]ÎªÉÏÒ»ËÙ¶È
+*	description....:	å¦‚æœåŠ é€Ÿåº¦çš„å€¼ä¸º0çš„æ¬¡æ•°è¶…è¿‡è®¾ç½®å€¼ï¼Œ
+				åˆ™å°†é€Ÿåº¦çš„å€¼ç½®0
+*	param..........:	accel_n	:åŠ é€Ÿåº¦å€¼æŒ‡é’ˆ
+				vel[in,changed]	:é€Ÿåº¦å€¼æŒ‡é’ˆ,vel[1][0-2]ä¸ºå½“å‰é€Ÿåº¦ï¼Œ
+				vel[0][0-2]ä¸ºä¸Šä¸€é€Ÿåº¦
 **************************************************************/
 void movement_End_Check(int32 accel_n[3], int32 vel[2][3])
 {
 	static unsigned int countx = 0, county = 0, countz = 0;
-	//´¦ÀíXÖá
+	//å¤„ç†Xè½´
 	if (accel_n[0] == 0) //we count the number of acceleration samples that equals cero
 	{
 		countx++;
@@ -118,7 +118,7 @@ void movement_End_Check(int32 accel_n[3], int32 vel[2][3])
 		vel[1][0] = 0;
 		vel[0][0] = 0;
 	}
-	//´¦ÀíYÖá
+	//å¤„ç†Yè½´
 	if (accel_n[1] == 0) //we do the same for the Y axis
 	{
 		county++;
@@ -132,7 +132,7 @@ void movement_End_Check(int32 accel_n[3], int32 vel[2][3])
 		vel[1][1] = 0;
 		vel[0][1] = 0;
 	}
-	//´¦ÀíZÖá
+	//å¤„ç†Zè½´
 	if (accel_n[2] == 0)
 	{
 		countz++;
@@ -147,13 +147,13 @@ void movement_End_Check(int32 accel_n[3], int32 vel[2][3])
 
 /**************************************************************
 *	Name...........:	position
-*	description....:	Î»ÒÆ¼ÆËã
-*	param..........:	accel_n:µØÀí×ø±êÏµµÄ¼ÓËÙ¶ÈÖµÖ¸Õë£¬
-				accel_n[1][0-2]Îªµ±Ç°¼ÓËÙ¶È£¬accel_n[0][0-2]ÎªÇ°Ò»¼ÓËÙ¶È
-				vel[in,out]:ËÙ¶ÈÖµÖ¸Õë£¬
-				vel[1][0-2]Îªµ±Ç°ËÙ¶È£¬vel[0][0-2]ÎªÉÏÒ»ËÙ¶È
-				displayment[out]:Î»ÒÆÖ¸Õë£¬
-				displayment[1][0-2]Îªµ±Ç°Î»ÒÆ£¬displayment[0][0-2]ÎªÉÏÒ»Î»ÒÆ
+*	description....:	ä½ç§»è®¡ç®—
+*	param..........:	accel_n:åœ°ç†åæ ‡ç³»çš„åŠ é€Ÿåº¦å€¼æŒ‡é’ˆï¼Œ
+				accel_n[1][0-2]ä¸ºå½“å‰åŠ é€Ÿåº¦ï¼Œaccel_n[0][0-2]ä¸ºå‰ä¸€åŠ é€Ÿåº¦
+				vel[in,out]:é€Ÿåº¦å€¼æŒ‡é’ˆï¼Œ
+				vel[1][0-2]ä¸ºå½“å‰é€Ÿåº¦ï¼Œvel[0][0-2]ä¸ºä¸Šä¸€é€Ÿåº¦
+				displayment[out]:ä½ç§»æŒ‡é’ˆï¼Œ
+				displayment[1][0-2]ä¸ºå½“å‰ä½ç§»ï¼Œdisplayment[0][0-2]ä¸ºä¸Šä¸€ä½ç§»
 **************************************************************/
 void position(int32 accel_n[2][3], int32 vel[2][3], int32 displayment[2][3])
 {
@@ -177,18 +177,18 @@ void sigma_Filter(int16 accel[][ACC_FILTER_COUNT], int32 accel_res[][ACC_FILTER_
 
 	for (i = 0; i < 3; i++)
 	{
-		//ÒÔposÎªÊı¾İÖĞĞÄ£¬Çóaccel[pos-N,pos+N]µÄºÍ¡¢Æ½·½ºÍ
+		//ä»¥posä¸ºæ•°æ®ä¸­å¿ƒï¼Œæ±‚accel[pos-N,pos+N]çš„å’Œã€å¹³æ–¹å’Œ
 		for (j = pos - N; j <= pos + N; j++)
 		{
 			temp = accel[i][(j + ACC_FILTER_COUNT) % ACC_FILTER_COUNT];
 			sums[i][0] += temp;
 			sums[i][1] += temp * temp;
 		}
-		//ÇóĞòÁĞµÄÆ½¾ùÊıºÍ·½²î£¬×îºóÇó³ösigma·¶Î§
+		//æ±‚åºåˆ—çš„å¹³å‡æ•°å’Œæ–¹å·®ï¼Œæœ€åæ±‚å‡ºsigmaèŒƒå›´
 		mean = sums[i][0] / (2 * N + 1);
 		delta[i] = sums[i][1] / (2 * N + 1) - mean * mean;
 		delta[i] = SIGMA_WIDTH * sqrt(delta[i]);
-		//Ëã³öÔÚsigma·¶Î§µÄÔªËØ¸öÊı¼°ºÍ
+		//ç®—å‡ºåœ¨sigmaèŒƒå›´çš„å…ƒç´ ä¸ªæ•°åŠå’Œ
 		for (j = pos - N; j <= pos + N; j++)
 		{
 			if (accel[i][(j + ACC_FILTER_COUNT) % ACC_FILTER_COUNT] < delta[i] + accel[i][pos] && accel[i][(j + ACC_FILTER_COUNT) % ACC_FILTER_COUNT] > accel[i][pos] - delta[i])
@@ -197,12 +197,12 @@ void sigma_Filter(int16 accel[][ACC_FILTER_COUNT], int32 accel_res[][ACC_FILTER_
 				sum[i] += accel[i][(j + ACC_FILTER_COUNT) % ACC_FILTER_COUNT];
 			}
 		}
-		//³¬¹ı·§Öµ£¬ÔòÓÃsigma·¶Î§ÀïµÄÔªËØµÄÆ½¾ùÊıÌæ´ú
+		//è¶…è¿‡é˜€å€¼ï¼Œåˆ™ç”¨sigmaèŒƒå›´é‡Œçš„å…ƒç´ çš„å¹³å‡æ•°æ›¿ä»£
 		if (count[i] >= K)
 		{
 			accel_res[i][pos] = sum[i] / count[i];
 		}
-		else//ÓÃĞòÁĞÖĞËùÓĞÔªËØµÄÆ½¾ùÊıÌæ´ú£¬³ıÁËaccel[pos]
+		else//ç”¨åºåˆ—ä¸­æ‰€æœ‰å…ƒç´ çš„å¹³å‡æ•°æ›¿ä»£ï¼Œé™¤äº†accel[pos]
 		{
 			accel_res[i][pos] = (sums[i][0] - accel[i][pos]) / (2 * N);
 		}
@@ -214,12 +214,12 @@ void insert_AccelData(int16 accel[3])
 {
 	int i;
 	
-	//½«iÖáµÄ¼ÓËÙ¶È±£´æÔÚacc_data_indexÁĞÖĞ
+	//å°†iè½´çš„åŠ é€Ÿåº¦ä¿å­˜åœ¨acc_data_indexåˆ—ä¸­
 	for (i = 0; i<3; i++)
 	{
 		acc_xyz_data[i][acc_data_index] = accel[i];
 	}
-	//acc_data_indexÑ­»·¼Ó1
+	//acc_data_indexå¾ªç¯åŠ 1
 	acc_data_index++;
 
 	if (acc_data_index == ACC_FILTER_COUNT)
@@ -241,34 +241,34 @@ int16 originalPlace_Drift(int16 gyro[3])
 #if ANGLE_FILTER_AVERGE_OPEN
 /**************************************************************
 *	Name...........:	angle_Filter
-*	description....:	¶ÔÔ­Ê¼Êı¾İÖµ½øĞĞÂË²¨
-*	param..........:	angle[in,changed]	:Ô­Ê¼Êı¾İ¼ÓËÙ¶ÈÖµ
-				angle_ave[out]	:ÂË²¨µÃµ½µÄ¼ÓËÙ¶ÈÖµ
+*	description....:	å¯¹åŸå§‹æ•°æ®å€¼è¿›è¡Œæ»¤æ³¢
+*	param..........:	angle[in,changed]	:åŸå§‹æ•°æ®åŠ é€Ÿåº¦å€¼
+				angle_ave[out]	:æ»¤æ³¢å¾—åˆ°çš„åŠ é€Ÿåº¦å€¼
 **************************************************************/
 void angle_Filter(int32 angle[3], int32 angle_ave[3])
 {
 	int i, j;
 	int32	angle_data_sum[3] = { 0 };
 
-	//ÏÈ½øĞĞÒ»´Î»úĞµ´°¿ÚÂË²¨
+	//å…ˆè¿›è¡Œä¸€æ¬¡æœºæ¢°çª—å£æ»¤æ³¢
 	for (i = 0; i < 3; i++)
 	{
 		if (angle[i] < ANGLE_WINDOW_H && angle[i] > ANGLE_WINDOW_L)
 			angle[i] = 0;
 	}
-	//½«iÖáµÄ¼ÓËÙ¶È±£´æÔÚangle_data_indexÁĞÖĞ
+	//å°†iè½´çš„åŠ é€Ÿåº¦ä¿å­˜åœ¨angle_data_indexåˆ—ä¸­
 	for (i = 0; i<3; i++)
 	{
 		angle_xyz_data[i][acc_data_index] = angle[i];
 	}
-	//angle_data_indexÑ­»·¼Ó1
+	//angle_data_indexå¾ªç¯åŠ 1
 	angle_data_index++;
 
 	if (angle_data_index == ANGLE_FILTER_COUNT)
 	{
 		angle_data_index = 0;
 	}
-	//ĞĞÇóºÍ
+	//è¡Œæ±‚å’Œ
 	for (i = 0; i<3; i++)
 	{
 		for (j = 0; j<ANGLE_FILTER_COUNT; j++)

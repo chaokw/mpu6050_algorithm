@@ -1,14 +1,14 @@
-/**************************************************************
+ï»¿/**************************************************************
 *	Include File Section
 **************************************************************/
 #include <string.h>
 #include <stdio.h>
 //#include "Board_uart.h"
-#include "mpu6050_etootle_imu.h"      //Å·À­½Ç
-#include "mpu6050_position_data.h"     //Î»ÒÆ
+#include "mpu6050_etootle_imu.h"      //æ¬§æ‹‰è§’
+#include "mpu6050_position_data.h"     //ä½ç§»
 
 
-signed short int ax, ay, az, gx, gy, gz;   //´æ´¢´ÓÀ¶ÑÀ½ÓÊÕµ½µÄ6ÖáÊı¾İ£¬ ax,ay,azÎª¼ÓËÙ¶È£¬gx,gy,gzÎªÍÓÂİÒÇ
+signed short int ax, ay, az, gx, gy, gz;   //å­˜å‚¨ä»è“ç‰™æ¥æ”¶åˆ°çš„6è½´æ•°æ®ï¼Œ ax,ay,azä¸ºåŠ é€Ÿåº¦ï¼Œgx,gy,gzä¸ºé™€èºä»ª
 int32 accel_xyz_data[3][ACC_FILTER_COUNT];  //chaokw
 int16 accel_pos = 0;
 
@@ -25,11 +25,11 @@ int main()
 	while(1)
 	{	
 	
-		// ×ËÌ¬¼ÆËã(Å·À­½Ç)
+		// å§¿æ€è®¡ç®—(æ¬§æ‹‰è§’)
 		BS004_Get_MPU6050_Data(ax, ay, az, gx, gy, gz);
 		BS004_Quad_Calculation();
 
-		// Î»ÒÆ¼ÆËã
+		// ä½ç§»è®¡ç®—
 		accel[0] = ax;
 		accel[1] = ay;
 		accel[2] = az;
@@ -71,7 +71,7 @@ int main()
 		}
 
 
- 		//´®¿Ú´òÓ¡¼ÆËã³öµÄ×ËÌ¬ºÍÎ»ÒÆ
+ 		//ä¸²å£æ‰“å°è®¡ç®—å‡ºçš„å§¿æ€å’Œä½ç§»
  		char strTemp[128];
 		sprintf(strTemp, "pitch:%f, roll:%f, yaw:%f, x:%f, y:%f\r\n",bs004_imu_pitch, bs004_imu_roll, bs004_imu_yaw, locate_x, locate_y);                                                                                                                        
 		UART_WriteTransport((uint8*)strTemp, strlen(strTemp)); 

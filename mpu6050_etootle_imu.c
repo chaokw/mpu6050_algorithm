@@ -1,4 +1,4 @@
-
+ï»¿
 
 /**************************************************************
 *	Include File Section
@@ -79,18 +79,18 @@ void BS004_Load_Filter_Parameter(void)
 	bs004_filter_par[10]=1600;   //1600;   //1600  2000   chaokw   //pdf  10000
 	bs004_filter_par[11]=1;    // 1;		// 1  5   //pdf  8
 	
-	bs004_filter_high=(float)bs004_filter_par[0]/1000.0f;				//ÂË²¨²ÎÊı
-	bs004_filter_low=(float)bs004_filter_par[1]/1000.0f;				//ÂË²¨²ÎÊı	
-	bs004_filter_time=(float)bs004_filter_par[2]/1000.0f;				//ÂË²¨²ÎÊı		
-	bs004_sys_timer_period=(unsigned int)bs004_filter_par[3]-1; 		//´«¸ĞÆ÷²ÉÑùÆµÂÊ
+	bs004_filter_high=(float)bs004_filter_par[0]/1000.0f;				//æ»¤æ³¢å‚æ•°
+	bs004_filter_low=(float)bs004_filter_par[1]/1000.0f;				//æ»¤æ³¢å‚æ•°	
+	bs004_filter_time=(float)bs004_filter_par[2]/1000.0f;				//æ»¤æ³¢å‚æ•°		
+	bs004_sys_timer_period=(unsigned int)bs004_filter_par[3]-1; 		//ä¼ æ„Ÿå™¨é‡‡æ ·é¢‘ç‡
 	
-	bs004_mpu6050_gyro_scale=(float)bs004_filter_par[4]/100.0f;			//ÍÓÂİÒÇÁéÃô¶È
+	bs004_mpu6050_gyro_scale=(float)bs004_filter_par[4]/100.0f;			//é™€èºä»ªçµæ•åº¦
 	
-	bs004_mpu6050_pi_scale=(float)bs004_filter_par[5]/100.0f;		//»¡¶ÈÏµÊı
-	//bs004_hmc5883l_mag_scale=(float)bs004_filter_par[6]/1000.0f;		//´ÅÁ¦¼ÆÁéÃô¶È
-	bs004_quad_halfT=(float)bs004_filter_par[9]/1000.0f;				//ËÄÔªÊıÊ±¼äÏµÊı
-	bs004_quad_Kp=(float)bs004_filter_par[10]/1000.0f;				//ËÄÔªÊı±ÈÀıÏµÊı
-	bs004_quad_Ki=(float)bs004_filter_par[11]/1000.0f;				//ËÄÔªÊı»ı·ÖÏµÊı
+	bs004_mpu6050_pi_scale=(float)bs004_filter_par[5]/100.0f;		//å¼§åº¦ç³»æ•°
+	//bs004_hmc5883l_mag_scale=(float)bs004_filter_par[6]/1000.0f;		//ç£åŠ›è®¡çµæ•åº¦
+	bs004_quad_halfT=(float)bs004_filter_par[9]/1000.0f;				//å››å…ƒæ•°æ—¶é—´ç³»æ•°
+	bs004_quad_Kp=(float)bs004_filter_par[10]/1000.0f;				//å››å…ƒæ•°æ¯”ä¾‹ç³»æ•°
+	bs004_quad_Ki=(float)bs004_filter_par[11]/1000.0f;				//å››å…ƒæ•°ç§¯åˆ†ç³»æ•°
 	
 }
 
@@ -144,17 +144,17 @@ void BS004_Load_Calibration_Parameter(void)
 
 
 #if 0   //chaokw
-	bs004_mpu6050_gyro_pitch_cal=(signed short int)bs004_cal_par[0];	//ÍÓÂİÒÇĞ£Ñé²ÎÊı
-	bs004_mpu6050_gyro_roll_cal=(signed short int)bs004_cal_par[1];   //ÍÓÂİÒÇĞ£Ñé²ÎÊı
-	bs004_mpu6050_gyro_yaw_cal=(signed short int)bs004_cal_par[2];    //ÍÓÂİÒÇĞ£Ñé²ÎÊı
-	bs004_mpu6050_acc_roll_cal=(signed short int)bs004_cal_par[3];		//¼ÓËÙ¶ÈĞ£Ñé²ÎÊı
-	bs004_mpu6050_acc_pitch_cal=(signed short int)bs004_cal_par[4];   //¼ÓËÙ¶ÈĞ£Ñé²ÎÊı
-	bs004_mpu6050_acc_yaw_cal=(signed short int)bs004_cal_par[5];     //¼ÓËÙ¶ÈĞ£Ñé²ÎÊı
-	//bs004_hmc5883l_mag_pitch_cal=(signed short int)bs004_cal_par[6];  //´ÅÁ¦¼ÆĞ£Ñé²ÎÊı
-	//bs004_hmc5883l_mag_roll_cal=(signed short int)bs004_cal_par[7];   //´ÅÁ¦¼ÆĞ£Ñé²ÎÊı
-	//bs004_hmc5883l_mag_yaw_cal=(signed short int)bs004_cal_par[8];    //´ÅÁ¦¼ÆĞ£Ñé²ÎÊı
+	bs004_mpu6050_gyro_pitch_cal=(signed short int)bs004_cal_par[0];	//é™€èºä»ªæ ¡éªŒå‚æ•°
+	bs004_mpu6050_gyro_roll_cal=(signed short int)bs004_cal_par[1];   //é™€èºä»ªæ ¡éªŒå‚æ•°
+	bs004_mpu6050_gyro_yaw_cal=(signed short int)bs004_cal_par[2];    //é™€èºä»ªæ ¡éªŒå‚æ•°
+	bs004_mpu6050_acc_roll_cal=(signed short int)bs004_cal_par[3];		//åŠ é€Ÿåº¦æ ¡éªŒå‚æ•°
+	bs004_mpu6050_acc_pitch_cal=(signed short int)bs004_cal_par[4];   //åŠ é€Ÿåº¦æ ¡éªŒå‚æ•°
+	bs004_mpu6050_acc_yaw_cal=(signed short int)bs004_cal_par[5];     //åŠ é€Ÿåº¦æ ¡éªŒå‚æ•°
+	//bs004_hmc5883l_mag_pitch_cal=(signed short int)bs004_cal_par[6];  //ç£åŠ›è®¡æ ¡éªŒå‚æ•°
+	//bs004_hmc5883l_mag_roll_cal=(signed short int)bs004_cal_par[7];   //ç£åŠ›è®¡æ ¡éªŒå‚æ•°
+	//bs004_hmc5883l_mag_yaw_cal=(signed short int)bs004_cal_par[8];    //ç£åŠ›è®¡æ ¡éªŒå‚æ•°
 #else
-	bs004_mpu6050_gyro_pitch_cal=-4;   //-15;
+	bs004_mpu6050_gyro_pitch_cal=-4;   //-15;    æ°´å¹³
 	bs004_mpu6050_gyro_roll_cal=26;     //14;
 	bs004_mpu6050_gyro_yaw_cal=-4;    //5;
 	bs004_mpu6050_acc_roll_cal=80;    //-34;
@@ -198,7 +198,7 @@ unsigned char BS004_IMU_Update(float ax,float ay,float az,float gx,float gy,floa
 	float ex, ey, ez;  
 	float gz_input;  //chaokw
 	
-	//ËÄÔªÊı³Ë·¨ÔËËã
+	//å››å…ƒæ•°ä¹˜æ³•è¿ç®—
 	float q0q0 = q0 * q0;							
 	float q0q1 = q0 * q1;
 	float q0q2 = q0 * q2;
@@ -210,40 +210,40 @@ unsigned char BS004_IMU_Update(float ax,float ay,float az,float gx,float gy,floa
 		
 	gz_input=gz*bs004_quad_halfT;
 	
-	//¹éÒ»»¯´¦Àí
+	//å½’ä¸€åŒ–å¤„ç†
 	norm = sqrt(ax*ax + ay*ay + az*az);     
 	if(norm==0) return 0;	
 	ax = ax / norm;
 	ay = ay / norm;
 	az = az / norm;   
   
-	//½¨Á¢Ğ¡ËÄÖá×ø±êÏµ	
+	//å»ºç«‹å°å››è½´åæ ‡ç³»	
 	vx = 2*(q1q3 - q0q2);								
 	vy = 2*(q0q1 + q2q3);
 	vz = q0q0 - q1q1 - q2q2 + q3q3;
 	
-	//×ø±êÏµºÍÖØÁ¦²æ»ıÔËËã
+	//åæ ‡ç³»å’Œé‡åŠ›å‰ç§¯è¿ç®—
 	ex = (ay*vz - az*vy);								
 	ey = (az*vx - ax*vz);
 	ez = (ax*vy - ay*vx);
 	
-	//±ÈÀıÔËËã
+	//æ¯”ä¾‹è¿ç®—
 	exInt = exInt + ex*bs004_quad_Ki;
 	eyInt = eyInt + ey*bs004_quad_Ki;
 	ezInt = ezInt + ez*bs004_quad_Ki;
 	
-	//ÍÓÂİÒÇÈÚºÏ
+	//é™€èºä»ªèåˆ
 	gx = gx + bs004_quad_Kp*ex + exInt;
 	gy = gy + bs004_quad_Kp*ey + eyInt;
 	gz = gz + bs004_quad_Kp*ez + ezInt;
 	
-	//ÕûºÏËÄÔªÊıÂÊ
+	//æ•´åˆå››å…ƒæ•°ç‡
 	q0 = q0 + (-q1*gx - q2*gy - q3*gz)*bs004_quad_halfT;
 	q1 = q1 + (q0*gx + q2*gz - q3*gy)*bs004_quad_halfT;
 	q2 = q2 + (q0*gy - q1*gz + q3*gx)*bs004_quad_halfT;
 	q3 = q3 + (q0*gz + q1*gy - q2*gx)*bs004_quad_halfT;  
 	
-	//¹éÒ»»¯´¦Àí
+	//å½’ä¸€åŒ–å¤„ç†
 	norm = sqrt(q0*q0 + q1*q1 + q2*q2 + q3*q3);
 	if(norm==0) return 0;	
 	q0 = q0 / norm;
@@ -258,7 +258,7 @@ unsigned char BS004_IMU_Update(float ax,float ay,float az,float gx,float gy,floa
 	quat[3] = q3;
 
 	
-	//Å·À­½Ç×ª»»
+	//æ¬§æ‹‰è§’è½¬æ¢
 	bs004_imu_roll = asin(-2*q1q3 + 2*q0q2)*57.30f;
  	bs004_imu_pitch = atan2(2*q2q3 + 2*q0q1, -2*q1q1-2*q2q2 + 1)*57.30f; 
 		
