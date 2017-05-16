@@ -11,9 +11,9 @@
 #define ANGLE_WINDOW_H  1
 #define ANGLE_WINDOW_L  -1
 
-#define	ACC_FILTER_COUNT  1  //5   //chaokw
-#define TRESHOLD_COUNT  10
-#define ANGLE_FILTER_COUNT  4
+#define	ACC_FILTER_COUNT	50  //  1  //5   //chaokw
+#define TRESHOLD_COUNT 10
+#define ANGLE_FILTER_COUNT 4
 
 #define SIGMA_FILTER_OPEN 	1   //chaokw
 #define AVERGE_FILTER_OPEN  0
@@ -42,5 +42,9 @@ void sigma_Filter(int16 accel[][ACC_FILTER_COUNT], int32 accel_res[][ACC_FILTER_
 void insert_AccelData(int16 accel[3]);
 int16 originalPlace_Drift(int16 gyro[3]);
 void angle_Filter(int32 angle[3], int32 angle_ave[3]);
+void BS004_Position_Calculation(signed short int ax, signed short int ay, signed short int az);
 
+/**************************************************************
+*	End-Multi-Include-Prevent Section
+**************************************************************/
 #endif

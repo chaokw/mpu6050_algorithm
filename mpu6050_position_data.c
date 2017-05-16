@@ -3,7 +3,7 @@
 *	Include File Section
 **************************************************************/
 #include "math.h"
-#include "PosSensorDataProc.h"
+#include "mpu6050_position_data.h"
 
 /**************************************************************
 *	Macro Define Section
@@ -24,6 +24,11 @@ int16 angle_data_index;
 int32 angle_xyz_data[3][ANGLE_FILTER_COUNT] = { 0 };
 #endif
 
+int32 accel_xyz_data[3][ACC_FILTER_COUNT]; 
+int16 accel_pos = 0;
+extern float quat[4];
+extern float locate_x, locate_y;
+extern signed short int bs004_mpu6050_acc_pitch_cal,bs004_mpu6050_acc_roll_cal;
 
 /**************************************************************
 *	Function Define Section
@@ -280,3 +285,52 @@ void angle_Filter(int32 angle[3], int32 angle_ave[3])
 
 }
 #endif
+
+
+void BS004_Position_Calculation(signed short int ax, signed short int ay, signed short int az)   
+{
+	signed short int accel[3];
+ 	int32 vel[2][3]={0},disp[2][3] = {0},accel_ave[3],accel_res[2][3]={0};
+	int16 i;
+
+	accel[0] = ax - bs004_mpu6050_acc_roll_cal;
+	accel[1] = ay - bs004_mpu6050_acc_pitch_cal;
+	accel[2] = az;
+	insert_AccelData(accel);
+
+	sigma_Filter(acc_xyz_data,accel_xyz_data,accel_pos,15,4);
+	accel_ave[0] = accel_xyz_data[0][accel_pos];
+	accel_ave[1] = accel_xyz_data[1][accel_pos];
+	accel_ave[2] = accel_xyz_data[2][accel_pos];
+			
+	accel_pos++;
+	if (accel_pos == ACC_FILTER_COUNT)
+	{
+		accel_pos = 0;
+	}
+
+	accel_BConvertToN(accel_res[1],accel_ave,quat);
+						
+	for(i=0;i<3;i++)
+	{
+		if(accel_res[1][i] < ACCEL_WINDOW_H && accel_res[1][i] > ACCEL_WINDOW_L)
+		accel_res[1][i] = 0;
+	}
+						
+	accel_res[1][2] -= 14890;	
+	position(accel_res,vel,disp);
+
+	
+	locate_x = (disp[0][0] - disp[1][0])*10/16384;   //2048;  //chaokw
+	locate_y = (disp[1][1] - disp[0][1])*10/16384;  //2048;
+
+	movement_End_Check(accel_res[1],vel);
+
+			
+	for(i = 0; i < 3; i++)
+	{
+		vel[0][i] = vel[1][i];
+		disp[0][i] = disp[1][i];
+		accel_res[0][i] = accel_res[1][i];
+	}
+}	

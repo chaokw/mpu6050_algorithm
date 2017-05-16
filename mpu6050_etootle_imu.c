@@ -4,6 +4,9 @@
 *	Include File Section
 **************************************************************/
 #include "mpu6050_etootle_imu.h" 
+#include <string.h>
+#include <stdio.h>
+
 //#include "sensor.h"
 //#include "bsp_i2c.h"
 
@@ -72,9 +75,9 @@ void BS004_Load_Filter_Parameter(void)
 	bs004_filter_par[3]=1000;
 	bs004_filter_par[4]=1640;   //8192;    //1640;
 	bs004_filter_par[5]=5730;   //8725;    //5730;
-	//bs004_filter_par[6]=1000;
-	//bs004_filter_par[7]=1000;
-	//bs004_filter_par[8]=36;
+	bs004_filter_par[6]=1000;
+	bs004_filter_par[7]=1000;
+	bs004_filter_par[8]=36;
 	bs004_filter_par[9]=5;  //6;   // 1;    chaolw
 	bs004_filter_par[10]=1600;   //1600;   //1600  2000   chaokw   //pdf  10000
 	bs004_filter_par[11]=1;    // 1;		// 1  5   //pdf  8
@@ -135,7 +138,7 @@ void BS004_Cal_MPU6050_Data(int *bs004_cal_data)
 #if 1    //chaokw       Calibration to be done by mpu6050
 void BS004_Load_Calibration_Parameter(void)
 {
-	int bs004_cal_par[12];
+//	int bs004_cal_par[12];
 
 
 #if 0
@@ -163,11 +166,11 @@ void BS004_Load_Calibration_Parameter(void)
 #endif
 
        //DISPLACEMENT
-	signed short int accel[3];
-	accel[0] = bs004_mpu6050_acc_roll_cal;
-	accel[1] = bs004_mpu6050_acc_pitch_cal;
-	accel[2] = bs004_mpu6050_acc_yaw_cal;
-	insert_AccelData(accel);
+//	signed short int accel[3];
+//	accel[0] = bs004_mpu6050_acc_roll_cal;
+//	accel[1] = bs004_mpu6050_acc_pitch_cal;
+//	accel[2] = bs004_mpu6050_acc_yaw_cal;
+//	insert_AccelData(accel);
 
 
 }

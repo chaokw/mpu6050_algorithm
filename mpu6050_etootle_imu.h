@@ -9,7 +9,6 @@
 extern float bs004_imu_pitch, bs004_imu_roll, bs004_imu_yaw;
 extern float locate_x, locate_y;  //chaokw
 
-
 /**************************************************************
 *	Prototype Declare Section
 **************************************************************/

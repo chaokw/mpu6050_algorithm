@@ -30,6 +30,7 @@ int main()
 		BS004_Quad_Calculation();
 
 		// 位移计算
+#if 0  //chaokw 20170515
 		accel[0] = ax;
 		accel[1] = ay;
 		accel[2] = az;
@@ -69,6 +70,11 @@ int main()
 			disp[0][i] = disp[1][i];
 			accel_res[0][i] = accel_res[1][i];
 		}
+#else
+
+		BS004_Position_Calculation(ax, ay, az);
+
+#endif
 
 
  		//串口打印计算出的姿态和位移
