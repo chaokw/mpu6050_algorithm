@@ -140,7 +140,6 @@ void BS004_Load_Calibration_Parameter(void)
 {
 //	int bs004_cal_par[12];
 
-
 #if 0
 	BS004_Cal_MPU6050_Data(bs004_cal_par);
 #endif
@@ -182,11 +181,10 @@ void BS004_Quad_Calculation(void)
 	float ax=0,ay=0,az=0,gx=0,gy=0,gz=0;
 	
 	bs004_gyro_to_rad_scale=bs004_mpu6050_pi_scale*bs004_mpu6050_gyro_scale;
-		
+
 	gx=bs004_mpu6050_gyro_angel_pitch_ave/bs004_gyro_to_rad_scale;
 	gy=bs004_mpu6050_gyro_angel_roll_ave/bs004_gyro_to_rad_scale;
 	gz=bs004_mpu6050_gyro_angel_yaw_ave/bs004_gyro_to_rad_scale;		
-	
 	ax=bs004_mpu6050_acc_angel_roll_ave;
 	ay=bs004_mpu6050_acc_angel_pitch_ave;	
 	az=bs004_mpu6050_acc_angel_yaw_ave;		
